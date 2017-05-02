@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = 'Read/Write access to the online LastPass vault using LastPass CLI'
   spec.description   = 'Full access to the LastPass vault to create, read, and update account information and credentials.'
-  spec.homepage      = 'http://www.entretechno.com'
+  spec.homepage      = 'https://entretechno.github.io/lastpass-api'
   spec.license       = 'MIT'
 
   spec.files = `git ls-files -z`.split( "\x0" ).reject do |file|
