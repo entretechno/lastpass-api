@@ -47,7 +47,21 @@ sudo make -C /usr/ports/security/lastpass-cli all install clean
 apt-cyg install wget make cmake gcc-core gcc-g++ openssl-devel libcurl-devel libxml2-devel libiconv-devel cygutils-extra
 ```
 
-Instructions for building manually:  https://github.com/lastpass/lastpass-cli#building
+### Instructions for building manually
+
+```bash
+git clone https://github.com/lastpass/lastpass-cli.git
+cd lastpass-cli
+git checkout v1.1.2 # Or whatever version you'd like
+cmake . && make
+sudo make install
+# Reload path or login to a new shell terminal
+lpass --version
+# or
+./lpass --version
+```
+
+Further instructions can be found here:  https://github.com/lastpass/lastpass-cli#building
 
 ## Usage
 

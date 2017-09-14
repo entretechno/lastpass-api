@@ -2,7 +2,7 @@ module Lastpass
   class Groups < Collection
 
     def find( search_text, with_password: false )
-      search_text << '/' unless search_text.end_with? '/'
+      search_text << '/' unless search_text.to_s.end_with? '/'
       params = super
       if params.is_a?( Hash ) && params[:name]&.end_with?( '/' )
         Group.new( params )
