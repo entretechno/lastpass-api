@@ -27,11 +27,11 @@ module Lastpass
       original_inspect = super
       original_inspect.split( ' ' ).first << '>'
     end
-  end
 
-  private
+    private
 
-  def is_number?( string )
-    true if Float(string) rescue false
+    def is_number?( string )
+      true if Float(string) rescue false
+    end
   end
 end
