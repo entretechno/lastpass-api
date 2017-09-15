@@ -164,7 +164,7 @@ puts group.id
 group = @lastpass.groups.find( 'Group1' )
 
 # Find a specific group by ID
-group = @lastpass.groups.find( 1234 )
+group = @lastpass.groups.find( '1234' )
 
 puts group.to_h
 # => { id: '1234', name: 'Group1' }
