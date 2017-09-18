@@ -1,12 +1,29 @@
 module Lastpass
+
+  # Interact with a Lastpass account
   class Account
-    attr_reader :id, :group # TODO: Make group editable eventually
+    attr_reader :id
+    # @todo Make group editable eventually
+    attr_reader :group
     attr_accessor :name, :username, :password, :url, :notes
 
+    # @param params [Hash]
     def initialize( params )
       params_to_account( params )
     end
 
+    # Update the account details
+    #
+    # @param params [Hash]
+    # @example
+    #   account = @lastpass.accounts.find( 'MyAccount' )
+    #   account.update(
+    #     name: 'MyAccount EDIT',
+    #     username: 'root EDIT',
+    #     password: 'pass EDIT',
+    #     url: 'http://www.exampleEDIT.com',
+    #     notes: 'This is my note. EDIT'
+    #   )
     def update( params )
       deleted! if @deleted
       params.delete( :id ) # Prevent overwriting ID
@@ -15,7 +32,19 @@ module Lastpass
       save
     end
 
-    # TODO: This does not support changing groups yet!
+    # Either create or update an account, depending on what
+    # was changed on the account object before this method was called.
+    #
+    # @todo This does not support changing groups yet!
+    # @example
+    #   # Update using instance variables
+    #   account = @lastpass.accounts.find( 'MyAccount' )
+    #   account.name = 'MyAccount EDIT'
+    #   account.username = 'root EDIT'
+    #   account.password = 'pass EDIT'
+    #   account.url = 'http://www.exampleEDIT.com'
+    #   account.notes = 'This is my notes. EDIT'
+    #   account.save
     def save
       deleted! if @deleted
       # If there is an ID, update that entry
@@ -41,11 +70,22 @@ module Lastpass
       self
     end
 
+    # Delete the account
+    #
+    # @example
+    #   account = @lastpass.accounts.find( 1234 )
+    #   account.delete
     def delete
       Cli.rm( @id )
       @deleted = true
     end
 
+    # Hash representation of the account object
+    #
+    # @return [Hash]
+    # @example
+    #   puts account.to_h
+    #   # => { id: '1234', name: 'MyAccount', username: 'root', password: 'pass', url: 'http://www.example.com', notes: 'This is my note.', group: 'MyGroup' }
     def to_hash
       params = {}
       params[:id]       = @id       if @id
@@ -61,6 +101,8 @@ module Lastpass
     alias_method :to_h, :to_hash
 
     # Hide instance variables and values
+    #
+    # @api private
     def inspect
       original_inspect = super
       original_inspect.split( ' ' ).first << '>'

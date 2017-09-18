@@ -17,14 +17,24 @@ require 'lastpass-api/parser'
 module Lastpass
   @@verbose = false
 
+  # Verbose mode flag
   def self.verbose
     @@verbose
   end
 
+  # Set if you want to turn on verbose mode.  Turning on verbose will show much more output.
+  # This is good for debugging.  It will output any commands that are executed with "lpass".
+  #
+  # @return [Boolean]
+  # @example
+  #   Lastpass.verbose = true
   def self.verbose=( verbose )
     @@verbose = verbose
   end
 
+  private
+
+  # Make sure "lpass" is installed with the correct version.
   def self.check_lpass_in_path
     error_message = 'Cannot find the "lpass" executable in the path!'
     begin

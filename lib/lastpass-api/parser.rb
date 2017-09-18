@@ -1,16 +1,29 @@
 module Lastpass
+
+  # Internal class for parsing through Lastpass raw output
+  #
+  # @api private
   class Parser
 
+    # Method to interact directly with parser
+    #
+    # @param raw_string [String] Lastpass CLI response string
+    # @param with_passwords [Boolean] Whether or not to return passwords
+    # @return [Array<Hash>]
     def self.parse( raw_string, with_passwords: false )
       new( raw_string, with_passwords: with_passwords ).parse_all
     end
 
+    # @param (see parse)
     def initialize( raw_string, with_passwords: false )
       @raw_string = raw_string
       @with_passwords = with_passwords
       @all = {}
     end
 
+    # Parse through all lines in raw output
+    #
+    # @return [Array<Hash>]
     def parse_all
       @raw_string.split( "\n" ).each do |line|
         parse_line( line )
@@ -19,6 +32,8 @@ module Lastpass
     end
 
     # Hide instance variables and values
+    #
+    # @api private
     def inspect
       original_inspect = super
       original_inspect.split( ' ' ).first << '>'

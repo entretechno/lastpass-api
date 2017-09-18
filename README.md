@@ -180,6 +180,10 @@ puts groups.first.to_h
 
 #### Update group (rename a group)
 
+Note that although this does rename the group, any accounts that were inside the group
+will still remain under the original group name. Any new accounts that are created
+will be placed under the new group name.
+
 ```ruby
 # Update using instance variables
 group = @lastpass.groups.find( 'Group1' )

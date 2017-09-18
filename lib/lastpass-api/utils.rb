@@ -2,9 +2,18 @@ require 'colorize'
 require 'open3'
 
 module Lastpass
+
+  # Internal utility class
+  #
+  # @api private
   class Utils
 
     # Run a command
+    #
+    # @param command [String]
+    # @param output [Boolean] Print command output on stdout (default: false)
+    # @raise [StandardError] if execution of command has errors
+    # @return [String] Command output
     def self.cmd( command, output: false )
       puts "RUN COMMAND:  #{command}".green if Lastpass.verbose
       @stdout = ''
